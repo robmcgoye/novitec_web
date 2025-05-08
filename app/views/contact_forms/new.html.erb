@@ -1,0 +1,18 @@
+
+<% provide(:title, "Contact Us") %>
+
+<div class="card mb-3 p-3 shadow-lg rounded border">
+  <div class="row align-items-start card-body text-dark">
+    <div class="col">
+        <%= render 'form' %>
+    </div>
+    <div class="col p-2 rounded-lg m-1">
+      <% unless @page.body.blank? %>
+        <%= @page.body.html_safe %>
+      <% end %>
+    <%= link_to "edit", edit_page_path(@page), 
+        data: { turbo: false }, class: "btn btn-sm btn-outline-danger" if admin_user? %>
+    </div>
+  </div>
+</div>
+

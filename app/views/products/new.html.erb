@@ -1,0 +1,9 @@
+<% provide(:title, "New Product") %>
+
+<div class="card mb-3 shadow-lg rounded border">
+  <div class="card-body text-dark">
+    <h2>New Product</h2>
+    <%= render 'form', product: @product %>
+    <%= link_to 'Back', products_path, data: {turbo: false } %>
+  </div>
+</div>

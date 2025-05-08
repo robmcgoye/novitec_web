@@ -1,0 +1,23 @@
+<%= "REQUEST FROM: #{@user.full_name}" %>
+<%= "REQUESTOR EMAIL: #{@user.email}" %>
+Order Date : <%= Time.new.strftime("%b %e %Y") %>
+
+Shiping Address :
+<%= "#{@user.full_name}" %>
+<%= @address.address_line_1 %>
+<%= @address.address_line_2 if !@address.address_line_2.empty? %>
+<%= "#{@address.city} #{@address.state}, #{@address.zip}" %>
+
+Items :
+===============================================
+<% total_price = 0 %>
+<% @order.each do |item| %>
+  <% quantity = get_quantity(item.id) %>
+  <% price = item.price * quantity %>
+  <% total_price += price %>
+  <%= "#{quantity} x #{item.model_number} #{item.name} #{number_to_currency(price/100.0)}" %>
+<% end %>
+===============================================
+Subtotal : <%= number_to_currency(total_price/100.0) %>
+Shipping : TBD
+Total    : <%= number_to_currency(total_price/100.0) %>

@@ -1,0 +1,66 @@
+
+<h5>Your order request has been confirmed!</h5> 
+<div style="padding-bottom: 10px;">
+  <span class="font-weight-bold d-block">
+    <%= "Hello, #{@user.full_name}" %>
+  </span>
+  <span>
+    Your request has been confirmed. You will be contacted by Novi-Tec to confirm fitment. Then we will collect payment from you and notify you when your item(s) are shipped.
+  </span>
+</div>
+<br/>
+<table style="border-spacing: 0;">
+  <tr>
+    <td style="vertical-align: top;">
+      <b>Order Date :</b><br/>
+      <%= Time.new.strftime("%b %e %Y") %><br/>
+    </td>
+    <td colspan="3" style="vertical-align: top;">
+      <b>Shiping Address :</b><br/>
+      <%= "#{@user.full_name}" %><br/>
+      <%= @address.address_line_1 %><br/>
+      <%= "#{@address.address_line_2} <br/>".html_safe if !@address.address_line_2.empty? %>
+      <%= "#{@address.city} #{@address.state}, #{@address.zip}" %><br/>
+    </td>
+  </tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr style="font-weight: bold;">
+    <td style="border-bottom: 1px solid;padding-right: 10px;">Item</td>
+    <td style="text-align: right; border-bottom: 1px solid">Unit Price</td>
+    <td style="text-align: center; border-bottom: 1px solid;padding-left: 10px; padding-right: 10px;">Qty</td>
+    <td style="text-align: right; border-bottom: 1px solid">Item Total</td>
+  </tr>
+  <% total_price = 0 %>
+  <% @order.each.with_index do |item, index| %>
+    <% quantity = get_quantity(item.id) %>
+    <% price = item.price * quantity %>
+    <% total_price += price %>
+    <% if index.odd? %>
+      <tr style="background-color: #f2f2f2;">
+    <% else %>
+      <tr>
+    <% end %>
+      <td style="vertical-align: top;">
+        <%= item.name %> <br>
+        <%= item.model_number %>
+      </td>
+      <td style="vertical-align: top; text-align: right;"><%= number_to_currency(item.price/100.0) %></td>
+      <td style="vertical-align: top; text-align: center;"> <%= quantity %></td>
+      <td style="vertical-align: top; text-align: right;"><%= number_to_currency(price/100.0) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="3" style="border-top: 1px solid; text-align: right; font-weight: bold;">Subtotal : </td>
+    <td style="border-top: 1px solid; text-align: right;"><%= number_to_currency(total_price/100.0) %></td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: right; font-weight: bold;">Shipping : </td>
+    <td style="text-align: right;">TBD</td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: right; font-weight: bold;">Total : </td>
+    <td style="text-align: right;"><%= number_to_currency(total_price/100.0) %></td>
+  </tr>
+</table>
+<p>Please note that we will be contacting you to confirm fitment and stock. Then we will be collecting payment information from you before shipping. Once shipped We will be sending you the shipping information.</p>
+<p class="font-weight-bold">Thanks for shopping with us!</p>

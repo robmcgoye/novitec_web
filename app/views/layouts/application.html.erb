@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <title>Novi-Tec: <%= yield(:title) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" %>
+
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+        <%#= javascript_include_tag "application", "data-turbo-track": "reload", defer: "true" %>
+    
+    <%= tinymce_assets %>
+  </head>
+
+  <body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+      <%= render 'layouts/navbar' %>
+      <div class="container p-4">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
+    </main>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

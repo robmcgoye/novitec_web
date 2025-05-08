@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col">
+    <%= form_with(model: category, data: { turbo: false }) do |form| %>
+      <%= render 'shared/error_messages', resource: category %>
+      <div class="field form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="actions pt-2">
+        <%= form.submit class: "btn btn-sm btn-outline-danger" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col">
+    <% if category.products.present? %>
+      <h5>Products referenced to this category</h5>
+      <% category.products.each do |product| %>
+        <%= link_to product.name, edit_product_path(product), data: { turbo: false }  %>
+        <%= product.model_number %>
+        <br/>
+      <% end %>
+    <% end %>
+  </div>
+</div>

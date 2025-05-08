@@ -1,0 +1,8 @@
+<% provide(:title, "Edit Category") %>
+<div class="card mb-3 shadow-lg rounded border">
+  <div class="card-body text-dark">
+    <h2>Editing Category</h2>
+    <%= render 'form', category: @category %>
+    <%= link_to 'Back', categories_path, data: { turbo: false } %>
+  </div>
+</div>

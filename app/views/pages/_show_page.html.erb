@@ -1,0 +1,12 @@
+<% provide(:title, title) %>
+<div class="container">
+  <div class="card mb-3 shadow-lg rounded border">
+
+    <div class="card-body text-dark">
+      <% unless @page.body.blank? %>
+        <%= @page.body.html_safe %>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to "edit", edit_page_path(@page), data: { turbo: false }, class: "btn btn-sm btn-outline-danger" if admin_user? %>
+</div>

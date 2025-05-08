@@ -1,0 +1,77 @@
+<!-- red #FF0000 //-->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f7941e;">
+  <div class="container-fluid">
+    <%= link_to root_path, data: { turbo: false }, class: "navbar-brand" do %>
+      <%= image_tag("novi_sitelogo_sm.png", alt: "Novi-Tec", height: "24", 
+                      width: "159", class: "d-inline-block align-text-top") %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Products
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><%= link_to "All", products_path, data: { turbo: false }, class: "dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <% get_nav_categories.each do |nav_category| %>
+              <li><%= link_to nav_category.name, products_in_category_path(nav_category), data: { turbo: false }, class: "dropdown-item" %></li>
+            <% end %>
+            <% if admin_user? %>
+              <li><hr class="dropdown-divider"></li>
+              <li><i><%= link_to "Categories", categories_path, data: { turbo: false }, class: "dropdown-item" %></i></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <%= link_to about_us_path, data: { turbo: false }, class: "#{request.path == about_us_path  ? "nav-link active" : "nav-link"}" do %>
+            <i class="bi-info-circle"></i> About Us
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to new_contact_form_path, data: { turbo: false }, class: "#{request.path == new_contact_form_path  ? "nav-link active" : "nav-link"}" do %>
+            <i class="bi-telephone"></i> Contact Us
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if @cart.present? %>
+            <%= link_to cart_index_path, data: { turbo: false }, class: "#{request.path == cart_index_path  ? "nav-link active" : "nav-link"}" do %>
+              <i class="bi-cart"></i> Cart
+            <% end %>
+          <% else %>
+            <a class="nav-link disabled"><i class="bi-cart"></i> Cart</a>
+          <% end %>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi-person"></i>
+                <%= current_user.first_name %>
+                <%= "{ADMIN}" if current_user.admin? %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <%= link_to edit_user_registration_url(current_user), data: { turbo: false }, class: "dropdown-item" do %>
+                  <i class="bi-pencil"></i> Edit Profile
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-sm btn-outline-dark', method: :delete %>
+          <% else %>
+            <%= link_to "Login", user_session_path, data: { turbo: false }, class: "btn btn-sm btn-outline-dark" %>
+          <% end %>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>

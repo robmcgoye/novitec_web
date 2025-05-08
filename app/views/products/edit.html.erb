@@ -1,0 +1,14 @@
+<% provide(:title, "Edit Product") %>
+
+<div class="card mb-3 shadow-lg rounded border">
+  <div class="card-body text-dark">
+    <h2>Editing Product</h2>
+    <%= render 'form', product: @product %>
+    <div class="btn-group p-2">
+      <%= button_to 'Delete', @product, class: "btn btn-sm btn-outline-danger", 
+                            method: :delete, form: {data: {turbo_confirm: 'Are you sure?'} } %>
+      <%= link_to 'Show', @product, data: { turbo: false }, class: "btn btn-sm btn-outline-danger" %> 
+      <%= link_to 'Back', products_path, data: { turbo: false }, class: "btn btn-sm btn-outline-danger"%>
+    </div>
+  </div>
+</div>

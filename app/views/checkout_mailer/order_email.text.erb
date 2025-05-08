@@ -1,0 +1,31 @@
+
+Your order request has been confirmed!
+<%= "Hello, #{@user.full_name}" %>
+
+Your request has been confirmed. You will be contacted by Novi-Tec to confirm fitment. Then we will collect payment from you and notify you when your item(s) are shipped.
+
+Order Date : <%= Time.new.strftime("%b %e %Y") %>
+
+Shiping Address :
+<%= "#{@user.full_name}" %>
+<%= @address.address_line_1 %>
+<%= @address.address_line_2 if !@address.address_line_2.empty? %>
+<%= "#{@address.city} #{@address.state}, #{@address.zip}" %>
+
+Items :
+===============================================
+<% total_price = 0 %>
+<% @order.each do |item| %>
+  <% quantity = get_quantity(item.id) %>
+  <% price = item.price * quantity %>
+  <% total_price += price %>
+  <%= "#{quantity} x #{item.model_number} #{item.name} #{number_to_currency(price/100.0)}" %>
+<% end %>
+===============================================
+Subtotal : <%= number_to_currency(total_price/100.0) %>
+Shipping : TBD
+Total    : <%= number_to_currency(total_price/100.0) %>
+
+Please note that we will be contacting you to confirm fitment and stock. Then we will be collecting payment information from you before shipping. Once shipped We will be sending you the shipping information.
+
+Thanks for shopping with us!

@@ -1,0 +1,23 @@
+<!-- border border-danger //-->
+<%= cocooned_item do %>
+<div class="form-group nested-fields py-2 px-1 border border-dark">
+  <div class="row align-items-center pt-1">
+    <% if f.object.file.present? %>
+      <div class="col"> 
+        <%= image_tag f.object.file_url, size: "32" %>
+      </div>
+      <div class="col-6">
+        <%= f.object.file %>
+      </div>
+    <% else %>
+      <div class="field input-group col">
+        <label class="input-group-text" for="inputGroupFile01"><%= f.label :file, 'Image' %></label>
+        <%= f.file_field :file, accept: 'image/jpeg,image/gif,image/png', class: "form-control", id: "inputGroupFile01" %>
+      </div>
+    <% end %>
+    <div class="col d-flex justify-content-end">
+      <%= cocooned_remove_item_link 'Remove Image', f, class: 'btn btn-sm btn-outline-danger' %>
+    </div>
+  </div>  
+</div>
+<% end %>

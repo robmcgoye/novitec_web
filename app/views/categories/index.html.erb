@@ -1,0 +1,30 @@
+<% provide(:title, "Categories") %>
+<div class="card mb-3 shadow-lg rounded border">
+  <div class="card-body text-dark">
+    <h2>Categories</h2>
+    <%= link_to 'New Category', new_category_path, data: { turbo: false }, class: "btn btn-sm btn-danger" %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr scope="row">
+            <td><%= category.name %>&nbsp;</td>
+            <td>
+              <%= link_to 'Edit', edit_category_path(category), data: { turbo: false }, class: "btn btn-sm btn-outline-danger" %>
+              <% if category.products.present? %>
+                <i><%= "This category is referenced in #{pluralize(category.products.count, "product")}" %></i>
+              <% else %>
+                <%= button_to 'Delete', category, method: :delete, class: "btn btn-sm btn-outline-danger", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
