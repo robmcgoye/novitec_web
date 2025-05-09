@@ -8,6 +8,7 @@
     </div>
     <div class="col p-2 rounded-lg m-1">
       <% unless @page.body.blank? %>
+        <%# nosem: HTML is sanitized via Sanitize::Config::RELAXED %>
         <%== Sanitize.fragment(@page.body, Sanitize::Config::RELAXED) %>
       <% end %>
     <%= link_to "edit", edit_page_path(@page), 
