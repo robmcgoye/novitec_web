@@ -4,7 +4,7 @@
 
     <div class="card-body text-dark">
       <% unless @page.body.blank? %>
-        <%# nosem: HTML is sanitized via Sanitize::Config::RELAXED %>
+        <%# nosemgrep: HTML is sanitized via Sanitize::Config::RELAXED %>
         <%== Sanitize.fragment(@page.body, Sanitize::Config::RELAXED) %>
       <% end %>
     </div>
