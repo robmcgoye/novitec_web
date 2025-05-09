@@ -26,7 +26,7 @@
               <b class="text-brightred">MODEL NUMBER:</b> <%= @product.model_number %><br>
             </p>
             <p><%= number_to_currency(@product.price/100.0) %></p>
-            <p><%= @product.description.html_safe %></p>
+            <p><%== Sanitize.fragment(@product.description, Sanitize::Config::RELAXED) %></p>
             <div class="btn-group">
               <% if @cart.include?(@product) %>
                 <%= button_to "Remove from cart", remove_from_cart_path(@product), 

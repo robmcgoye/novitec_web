@@ -4,7 +4,8 @@
 
     <div class="card-body text-dark">
       <% unless @page.body.blank? %>
-        <%= @page.body.html_safe %>
+        <%#= @page.body.html_safe %>
+        <%== Sanitize.fragment(@page.body, Sanitize::Config::RELAXED) %>
       <% end %>
     </div>
   </div>
