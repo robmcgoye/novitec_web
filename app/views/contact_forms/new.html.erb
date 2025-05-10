@@ -7,12 +7,15 @@
         <%= render 'form' %>
     </div>
     <div class="col p-2 rounded-lg m-1">
-      <% if @page&.body.present? %>
+
+      <% @page.body ||= "no content available."%>
+      <% begin %>
         <%# nosemgrep: HTML is sanitized via Sanitize::Config::RELAXED %>
         <%== Sanitize.fragment(@page.body, Sanitize::Config::RELAXED) %>
-      <% else %>
-        <p>No content available.</p>
+      <% rescue StandardError => e %>
+        <%= "An error occurred while displaying the contact us content. Please contact support." %>
       <% end %>
+
     <%= link_to "edit", edit_page_path(@page), 
         data: { turbo: false }, class: "btn btn-sm btn-outline-danger" if admin_user? %>
     </div>
