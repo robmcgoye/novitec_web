@@ -7,9 +7,11 @@
         <%= render 'form' %>
     </div>
     <div class="col p-2 rounded-lg m-1">
-      <% unless @page.body.blank? %>
+      <% if @page&.body.present? %>
         <%# nosemgrep: HTML is sanitized via Sanitize::Config::RELAXED %>
         <%== Sanitize.fragment(@page.body, Sanitize::Config::RELAXED) %>
+      <% else %>
+        <p>No content available.</p>
       <% end %>
     <%= link_to "edit", edit_page_path(@page), 
         data: { turbo: false }, class: "btn btn-sm btn-outline-danger" if admin_user? %>
