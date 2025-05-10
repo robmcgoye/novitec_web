@@ -14,6 +14,10 @@ module RecaptchaVerifiable
 
   # You may want to define a generic resource_params and override in each controller if needed
   def resource_params
-    params[resource_name] ? params.require(resource_name).permit! : {}
+    if params[resource_name].present?
+      params.require(resource_name).permit!
+    else
+      {}
+    end
   end
 end
