@@ -27,6 +27,7 @@
             </p>
             <p><%= number_to_currency(@product.price/100.0) %></p>
             <p>
+              <% @product.description ||= "Description not available."%>
               <% begin %>
                 <%# nosemgrep: HTML is sanitized via Sanitize::Config::RELAXED %>
                 <%== Sanitize.fragment(@product.description, Sanitize::Config::RELAXED) %>
