@@ -26,8 +26,14 @@
               <b class="text-brightred">MODEL NUMBER:</b> <%= @product.model_number %><br>
             </p>
             <p><%= number_to_currency(@product.price/100.0) %></p>
-            <%# nosemgrep: HTML is sanitized via Sanitize::Config::RELAXED %>
-            <p><%== Sanitize.fragment(@product.description, Sanitize::Config::RELAXED) %></p>
+            <p>
+              <% begin %>
+                <%# nosemgrep: HTML is sanitized via Sanitize::Config::RELAXED %>
+                <%== Sanitize.fragment(@product.description, Sanitize::Config::RELAXED) %>
+              <% rescue StandardError => e %>
+                <%= "An error occurred while displaying the product description. Please contact support." %>
+              <% end %>
+            </p>
             <div class="btn-group">
               <% if @cart.include?(@product) %>
                 <%= button_to "Remove from cart", remove_from_cart_path(@product), 
