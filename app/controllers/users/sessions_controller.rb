@@ -28,4 +28,9 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   #
+  private
+
+  def resource_params
+    params.require(:user).permit(:email, :password, :remember_me)
+  end
 end

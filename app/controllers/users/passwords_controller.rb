@@ -33,4 +33,9 @@ class Users::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+  private
+
+  def resource_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
+  end
 end
