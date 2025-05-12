@@ -40,6 +40,8 @@
 /node_modules
 /public/uploads
 .deployment/config.conf
+.deployment/rails_master_key
+
 /development_notes.txt
 /config/credentials/development.key
 

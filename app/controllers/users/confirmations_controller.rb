@@ -32,6 +32,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   private
 
   def resource_params
-    params.require(:user).permit(:confirmation_token)
+    params.require(:user).permit(:email, :confirmation_token)
   end
 end
