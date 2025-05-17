@@ -38,7 +38,7 @@ gem "bootsnap", require: false
 gem "devise", "~> 4.9", ">= 4.9.4"
 gem "carrierwave", "~> 3.1", ">= 3.1.2"
 gem "mini_magick", "~> 5.2"
-gem "tinymce-rails", "~> 7.8"
+gem "tinymce-rails", "~> 7.9"
 gem "cocooned", "~> 2.4", ">= 2.4.1"
 gem "mail_form", "~> 1.10", ">= 1.10.1"
 gem "city-state", "~> 1.1"
