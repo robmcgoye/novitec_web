@@ -42,7 +42,7 @@ gem "tinymce-rails", "~> 7.8"
 gem "cocooned", "~> 2.4", ">= 2.4.1"
 gem "mail_form", "~> 1.10", ">= 1.10.1"
 gem "city-state", "~> 1.1"
-gem "recaptcha", "~> 5.19"
+gem "recaptcha", "~> 5.20"
 gem "sanitize", "~> 7.0"
 
 group :development, :test do
